@@ -7,7 +7,7 @@ import NavMenu from "@/components/NavMenu"
 export default function AppLayout() {
   return (
     <>
-       <header className="bg-gray-600 py-5">
+       <header className="bg-blue-400 py-5">
             <div className="max-w-screen-2xl flex mx-auto flex-col md:flex-row justify-between items-center">
                 <div className="w-64">
                     <Link

@@ -4,7 +4,7 @@ import { isAxiosError } from "axios";
 
 export async function createProject(formData : ProjectFormData) {
     try {
-        const { data } = await api.post('/new', formData)
+        const { data } = await api.post('/projects/new', formData)
         return data
     } catch (error) {
         console.log(error)
@@ -12,7 +12,7 @@ export async function createProject(formData : ProjectFormData) {
 }
 export async function getAllProjects() {
     try {
-        const { data } = await api('')
+        const { data } = await api('/projects')
         const result = dashboardProjectSchema.safeParse(data.data)
         if(result.success){
             return result.data
@@ -23,7 +23,7 @@ export async function getAllProjects() {
 }
 export async function getProjectById(id : Project['_id']) {
     try {
-        const { data } = await api(`/${id}`)
+        const { data } = await api(`/projects/${id}`)
         return(data.data)
     } catch (error) {
         console.log(error)
@@ -36,7 +36,7 @@ type ProjectAPIType ={
 }
 export async function updateProjectById({formData, projectId} : ProjectAPIType) {
     try {
-        const { data } = await api.put<string>(`/${projectId}`, formData)
+        const { data } = await api.put<string>(`/projects/${projectId}`, formData)
         return data
     } catch (error) {
         console.log(error)
@@ -44,7 +44,7 @@ export async function updateProjectById({formData, projectId} : ProjectAPIType) 
 }
 export async function deleteProjectById(projectId : Project['_id']) {
     try {
-        const { data } = await api.delete<string>(`/${projectId}`)
+        const { data } = await api.delete<string>(`/projects/${projectId}`)
         return data
     } catch (error) {
         if(isAxiosError(error) && error.response){

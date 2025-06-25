@@ -1,4 +1,15 @@
 import { z } from 'zod'
+/** Auth & User */
+export const authSchema = z.object({
+    name: z.string(),
+    email: z.string().email(),
+    password: z.string(),
+    password_confirmation: z.string()
+})
+
+export type Auth = z.infer<typeof authSchema>
+export type UserLoginForm = Pick<Auth, 'email' | 'password' >
+export type UserRegisterForm = Pick<Auth, 'email' | 'name' | 'password' | 'password_confirmation'>
 
 /** Projects */
 export const projectSchema = z.object({
@@ -27,7 +38,9 @@ export const taskSchema = z.object({
     name: z.string(),
     description: z.string(),
     project: z.string(),
-    status: taskStatusSchema
+    status: taskStatusSchema,
+    createdAt: z.string(),
+    updatedAt: z.string()
 })
 
 
